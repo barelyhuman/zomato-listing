@@ -1,0 +1,16 @@
+.cursor-pointer{
+    cursor: pointer;
+}
+
+.data-list-wrapper{
+    list-style-type:none;
+    padding-left:16px;
+}
+
+
+.data-list-wrapper.grid{
+    display: flex;
+    max-width: 100%;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}

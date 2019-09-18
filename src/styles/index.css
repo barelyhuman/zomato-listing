@@ -1,0 +1,61 @@
+
+
+.margin-sm{
+    margin:6px;
+}
+
+.margin-md{
+    margin:12px;
+}
+
+.margin-lg{
+    margin:16px;
+}
+
+.padding-sm{
+    padding:6px;
+}
+
+.padding-md{
+    padding:12px;
+}
+
+.padding-lg{
+    padding:16px;
+}
+
+.hover-black:hover{
+    color:black;
+}
+
+.data-card{
+    width: 150px;
+    height:150px;
+}
+
+.bold{
+    font-weight: 700;
+}
+
+.position-relative {
+    position: relative;
+}
+
+.position-absolute{
+    position: absolute;
+}
+
+.top-50 {
+    top:50%;
+}
+.left-50 {
+    left:50%;
+}
+
+.view-height-100{
+    height:100vh;
+}
+
+.transform-reverse-50{
+    transform: translate(-50%,-50%);
+}
