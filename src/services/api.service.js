@@ -7,14 +7,14 @@ const MAPAPICODES = require('../config.json').MAPAPI;
 const apiFactory = {};
 
 apiFactory.fetchGeoLocationDetails = (searchTerm) => {
-    const url = "http://geocoder.api.here.com/6.2/geocode.json?searchText=" + searchTerm + `&app_id=${MAPAPICODES.APPID}&app_code=${MAPAPICODES.APPCODE}`;
+    const url = "https://geocoder.api.here.com/6.2/geocode.json?searchText=" + searchTerm + `&app_id=${MAPAPICODES.APPID}&app_code=${MAPAPICODES.APPCODE}`;
     return axios.get(url)
         .then(data => data.data);
 }
 
 
 apiFactory.fetchLocationSuggestions = (searchTerm) => {
-    const url = "http://autocomplete.geocoder.api.here.com/6.2/suggest.json?query=" + searchTerm + `&app_id=${MAPAPICODES.APPID}&app_code=${MAPAPICODES.APPCODE}`;
+    const url = "https://autocomplete.geocoder.api.here.com/6.2/suggest.json?query=" + searchTerm + `&app_id=${MAPAPICODES.APPID}&app_code=${MAPAPICODES.APPCODE}`;
     return axios.get(url)
         .then(data => data.data);
 }
