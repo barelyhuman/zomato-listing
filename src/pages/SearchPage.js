@@ -40,13 +40,13 @@ export default (props) => {
             <div className="row position-absolute top-50 left-50 transform-reverse-50">
                 <div className="column column-50 column-offset-25">
                     <SearchBar onSearch={searchHandler} />
-                    <DataList list={searchDataList} template={
-                        (item) => (
+                    <DataList resolve={() => Promise.resolve(searchDataList)}>
+                        {(item) => (
                             <div key={item.uniqueId} className="hover-black margin-sm padding-sm cursor-pointer" onClick={(e) => setSelectedLocation(e, item)}>
                                 {item.addressLabel}
                             </div>
-                        )
-                    } />
+                        )}
+                    </DataList>
                 </div>
             </div>
         </div>

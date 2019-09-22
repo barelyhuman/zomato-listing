@@ -18,25 +18,25 @@ export default (props) => {
         classNameList.push('grid');
     }
 
-    if (props.resolve && !props.list) {
+    if (props.resolve) {
         useEffect(() => {
-            setLoading(true);
             props.resolve().then(data => {
                 setLoading(() => false);
                 setListItems(() => data);
             });
-        }, []);
-    } else if (props.list && !props.resolve) {
-        setListItems(props.list);
+        }, [props.resolve]);
     }
 
-    let template = "No Restaurants";
+
+    let template = null;
 
     if (loading) {
         template = <Loader />
-    } else if (listItems.length) {
-        template = listItems.map(listItem => {
-            return props.children(listItem);
+    } else if (!loading && !listItems.length) {
+        "No Data"
+    } else {
+        template = listItems.map(item => {
+            return props.children(item);
         });
     }
 

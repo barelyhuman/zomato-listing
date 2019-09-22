@@ -15,25 +15,6 @@ export default (props) => {
     const [restaurantsList, setRestaurantsList] = useState([]);
     const [loading, setLoading] = useState(false);
 
-    useEffect(() => {
-
-        const { location } = props.dataStore;
-
-        if (location && location.lat && location.lng) {
-
-            setLoading(() => true);
-
-            APIService.searchRestaurants(props.dataStore.location.lat, props.dataStore.location.lng)
-                .then(data => {
-                    setRestaurantsList(formatRestaurantResults(data.restaurants));
-                    setLoading(() => false);
-                })
-                .catch(err => {
-                    console.log(err);
-                });
-        }
-    }, [])
-
     const goToSearch = (e) => {
         e.preventDefault();
         return HistoryService.push('/');
@@ -66,17 +47,7 @@ export default (props) => {
                         {
                             loading
                                 ? <Loader size="30px" />
-                                // : <DataList styleType="grid" list={restaurantsList}>
-                                //     {
-                                //         (item) => (
-                                //             <div className="hover-black cursor-pointer data-card margin-md" id={item.uniqueId} key={item.uniqueId}>
-                                //                 <span className="bold">{item.restaurantLabel}</span>
-                                //                 <br />
-                                //                 <span>{item.rating + '★'}</span>
-                                //             </div>
-                                //         )
-                                //     }
-                                // </DataList>
+
                                 : <CategoriesSection dataStore={props.dataStore} categories={formattedCategories} />
                         }
                     </div>
