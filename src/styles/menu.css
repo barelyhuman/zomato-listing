@@ -1,0 +1,8 @@
+.menu-wrapper{
+    border-right:1px solid black;
+    display:flex;
+    position: fixed;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding-right:16px;
+}

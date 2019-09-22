@@ -20,8 +20,18 @@ apiFactory.fetchLocationSuggestions = (searchTerm) => {
 }
 
 
-apiFactory.searchRestaurants = (lat, lng) => {
-    const url = APIURL + `/search?lat=${lat}&lon=${lng}`
+apiFactory.searchRestaurants = (lat, lng, categoryId) => {
+    const url = APIURL + `/search?lat=${lat}&lon=${lng}&category=${categoryId}`
+    return axios.get(url, {
+        headers: {
+            'user-key': APIKEY
+        }
+    })
+        .then(data => data.data);
+}
+
+apiFactory.fetchCategories = () => {
+    const url = APIURL + `/categories`;
     return axios.get(url, {
         headers: {
             'user-key': APIKEY

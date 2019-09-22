@@ -3,6 +3,8 @@ import React, { useEffect, useState } from 'react';
 import DataList from "../components/DataList";
 import Button from "../components/Button";
 import Loader from "../components/Loader";
+import Menu from "../components/Menu";
+import CategoriesSection from "../components/CategoriesSection";
 
 import APIService from "../services/api.service";
 import ObjectGet from "../services/object-get.service";
@@ -39,38 +41,48 @@ export default (props) => {
 
     const currentLocation = ((props.dataStore || {}).location || {}).addressLabel || '';
 
+    const formattedCategories = formatCategories(props.categories);
+
     return (
         <div className="container">
-            <div className="row margin-md">
-                <div className="column column-50 column-offset-25">
-                    <div className="row">
-                        <div className="column">
-                            <p>Current Location: {currentLocation}</p>
-                        </div>
-                        <div className="column">
-                            <a href="#" onClick={goToSearch}>Set Location</a>
+            <div>
+                <div className="row margin-md">
+                    <div className="column column-50 column-offset-25">
+                        <div className="row">
+                            <div className="column">
+                                <p>Current Location: {currentLocation}</p>
+                            </div>
+                            <div className="column">
+                                <a href="#" onClick={goToSearch}>Set Location</a>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div className="row padding-lg">
-                <div className="column ">
-                    {
-                        loading
-                            ? <Loader size="30px" />
-                            : <DataList styleType="grid" list={restaurantsList} template={
-                                (item) => (
-                                    <div className="hover-black cursor-pointer data-card margin-md" key={item.uniqueId}>
-                                        <span className="bold">{item.restaurantLabel}</span>
-                                        <br />
-                                        <span>{item.rating + '★'}</span>
-                                    </div>
-                                )
-                            } />
-                    }
+                <div className="row padding-lg">
+                    <div className="column column-25">
+                        <Menu items={formattedCategories} />
+                    </div>
+                    <div className="column ">
+                        {
+                            loading
+                                ? <Loader size="30px" />
+                                // : <DataList styleType="grid" list={restaurantsList}>
+                                //     {
+                                //         (item) => (
+                                //             <div className="hover-black cursor-pointer data-card margin-md" id={item.uniqueId} key={item.uniqueId}>
+                                //                 <span className="bold">{item.restaurantLabel}</span>
+                                //                 <br />
+                                //                 <span>{item.rating + '★'}</span>
+                                //             </div>
+                                //         )
+                                //     }
+                                // </DataList>
+                                : <CategoriesSection dataStore={props.dataStore} categories={formattedCategories} />
+                        }
+                    </div>
                 </div>
-            </div>
-        </div >
+            </div >
+        </div>
     )
 }
 
@@ -94,9 +106,17 @@ function formatRestaurantResults(results) {
     });
 
     resultDataSet = resultDataSet.map((item, index) => {
-        item.uniqueId = index + item.restaurantLabel;
+        item.uniqueId = index
+        // + item.restaurantLabel;
         return item;
     })
 
     return resultDataSet;
+}
+
+function formatCategories(categoriesList) {
+    return categoriesList.map(catitem => ({
+        jumpId: catitem.categories.id,
+        label: catitem.categories.name
+    }));
 }
